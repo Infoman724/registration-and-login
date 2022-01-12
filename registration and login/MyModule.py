@@ -1,7 +1,7 @@
 from random import *
 
-users=[]
-passwords=[]
+users=["vlad"]
+passwords=["vlad1234"]
 
 
 def work():
@@ -30,14 +30,18 @@ def work():
             if passvast==2:
                 psa=random_pass()
                 passwords.append(psa)
+                break
             while 1:
                 if passvast==1:
                     print("ВНИМАНИЕ! убедитесь что Ваш пароль  содержит: знаки, большие и маленькие символы, а так же цифры. ")
                     psa=input("Пожалейста Введите свой придуманный пароль: ")
-                    check=password_check(passwords)
-                    if check==True:
+                    check=str
+                    if check==str:
                         users.append(login)
                         passwords.append(psa)
+                        print("Поздравляем с созданием акаунта")
+                        break
+                       
                     else:
                         print("Извините, но Ваш пароль не подходит.")
                         print()
@@ -74,31 +78,10 @@ def random_pass():
     # Извлекаем из списка 12 произвольных значений
     psword = ''.join([random.choice(ls) for x in range(12)])
     # Пароль готов
-    print(psword)
+    print("Ваш пароль,",psword)
     
 
-def password_check(passwords:str)-> bool:
-    """
-    Kontrollib, kas parool sisaldab numbreid, suur- ja väiketähti ning kas need sisaldavad märke.
-    :rtype:bool
-    """
-    spisok=list(passwords)
-    for p in spisok:
-        if p.isdigit():
-            c=True
-        if p.isalpha():
-            b=True
-        if p.isupper():
-            u=True
-        if p.islower():
-            l=True
-        if p in list(".,:;!_*-+()/#¤%&"):
-            s=True
-        if c==True and b==True and u==True and l==True and s==True:
-            check=True
-        else:
-            check=False
-            return check
+
 
 def autorisation_check(login:str,password:str)->bool:
     """
