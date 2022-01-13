@@ -38,7 +38,7 @@ def work():
                 if passvast==1: #Регистрация
                     print("ВНИМАНИЕ! убедитесь что Ваш пароль  содержит: знаки, большие и маленькие символы, а так же цифры. ")
                     psa=input("Пожалейста Введите свой придуманный пароль: ")
-                    check=password_check(passwords)
+                    check=password_check(psa)
                     if check==True:
                         users.append(login)
                         passwords.append(psa)
@@ -92,16 +92,16 @@ def password_check(passwords:str)-> bool:
     global check
     spisok=list(passwords)
     a=b=c=d=e=False
-    for b in spisok:
-        if b.isdigit(): 
+    for q in spisok:
+        if q.isdigit(): 
             a=True
-        if b.isalpha():
+        if q.isalpha():
             b=True
-        if b.isupper():
+        if q.isupper():
             c=True
-        if b.islower():
+        if q.islower():
             d=True
-        if b in list(".,:;!_*-+()/#¤%&"):
+        if q in list(".,:;!_*-+()/#¤%&"):
             e=True
         if a==True and b==True and c==True and d==True and e==True:
             check=True
@@ -109,7 +109,7 @@ def password_check(passwords:str)-> bool:
             check=False
     return check
 
-
+global psa
 def autorisation_check(login:str,password:str)->bool:
     """
     see funktsioon kontrollib kasutaja volitusi identsete sisselogimiste ja paroolide olemasolu loendites ning kui kõik on õige, tagastab see tõene
