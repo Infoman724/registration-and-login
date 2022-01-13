@@ -1,14 +1,17 @@
 from random import *
 
-users=["vlad"]
-passwords=["vlad1234"]
+users=[]
+passwords=[]
 
 
 def work():
     while True:
         print("Здравствуйте много уважаемый пользователь!, если хотите зарегистрироваться нажмите 1,если авторизваться то 2")
         print("1 - Регистрация")
+        print()
         print("2 - Авторизация")
+        print()
+        print("3-Выход из программы")
         vast=int(input())
         print()
         if vast==1:
@@ -32,11 +35,11 @@ def work():
                 passwords.append(psa)
                 break
             while 1:
-                if passvast==1:
+                if passvast==1: #Регистрация
                     print("ВНИМАНИЕ! убедитесь что Ваш пароль  содержит: знаки, большие и маленькие символы, а так же цифры. ")
                     psa=input("Пожалейста Введите свой придуманный пароль: ")
-                    check=str
-                    if check==str:
+                    check=password_check(passwords)
+                    if check==True:
                         users.append(login)
                         passwords.append(psa)
                         print("Поздравляем с созданием акаунта")
@@ -45,17 +48,18 @@ def work():
                     else:
                         print("Извините, но Ваш пароль не подходит.")
                         print()
-        if vast==2:
+        if vast==2:   #Авторизация
             print("Пожалйста Введите Ваши данные для входа!")
             login=str(input("Ваш логин - "))
             password=str(input("Ваш пароль - "))
             check=autorisation_check(login,password)
-            if check==True and check1==True:
+            if check==True and checkz==True:
                 print("Успешный вход, добро пожаловать!")
             else:
                 print("Неверный логин или пароль! Попробуйте ещё раз.")
                 print()
-
+        if vast==3:
+            break
 
 
 def random_pass():
@@ -78,9 +82,32 @@ def random_pass():
     # Извлекаем из списка 12 произвольных значений
     psword = ''.join([random.choice(ls) for x in range(12)])
     # Пароль готов
-    print("Ваш пароль,",psword)
-    
-
+    return psword
+check=False    
+def password_check(passwords:str)-> bool:
+    """
+    Kontrollib, kas parool sisaldab numbreid, suur- ja väiketähti ning kas need sisaldavad märke.
+    :rtype:bool
+    """
+    global check
+    spisok=list(passwords)
+    a=b=c=d=e=False
+    for b in spisok:
+        if b.isdigit(): 
+            a=True
+        if b.isalpha():
+            b=True
+        if b.isupper():
+            c=True
+        if b.islower():
+            d=True
+        if b in list(".,:;!_*-+()/#¤%&"):
+            e=True
+        if a==True and b==True and c==True and d==True and e==True:
+            check=True
+        else:
+            check=False
+    return check
 
 
 def autorisation_check(login:str,password:str)->bool:
@@ -89,12 +116,11 @@ def autorisation_check(login:str,password:str)->bool:
     :param str login:
     :param str password:
     """
+    check=checkz=False
     if login in users:
         check=True
-    else:
-        check=False
     if password in passwords:
-        check1=True
-    else:
-        check1=False
-        return check
+        checkz=True
+    if check==True and checkz==True and users.index(login)==passwords.index(psa):
+        check=True
+    return check
