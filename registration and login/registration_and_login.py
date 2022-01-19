@@ -1,5 +1,9 @@
 from MyModule import *
-users=["vlad"]
-passwords=["Vlad1234####"]
+users=[]
+users=faile_reader("logins.txt",users)
+print(users)
+
+
+passwords=[]
 
 a=work()
